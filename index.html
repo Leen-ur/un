@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dharma Semesta - Buku Dharma Digital</title>
+    <style>
+        /* Blue-white theme with cute elements */
+        :root {
+            --primary-blue: #4a86e8;
+            --light-blue: #c9daf8;
+            --very-light-blue: #edf4ff;
+            --white: #ffffff;
+            --dark-blue: #2c5aa0;
+            --text-color: #333333;
+            --accent-blue: #8ab4f8;
+        }
+
+        body {
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+            background-color: var(--very-light-blue);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-image: radial-gradient(var(--light-blue) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%),
+                linear-gradient(225deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%);
+            background-size: 20px 20px;
+            z-index: 0;
+        }
+
+        .logo-container {
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background-color: var(--white);
+            border-radius: 50%;
+            margin-right: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--white);
+        }
+
+        .site-title {
+            font-size: 2.8rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background-color: var(--white);
+            border-radius: 20px;
+            margin: 20px 0;
+            padding: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav li {
+            margin: 0 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            background-color: var(--light-blue);
+            transform: scale(1.05);
+        }
+
+        .book-section {
+            background-color: var(--white);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .book-section::after {
+            content: "💙";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+        }
+
+        .book-cover {
+            max-width: 250px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 20px 0;
+        }
+
+        .book-cover:hover {
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        h2 {
+            color: var(--dark-blue);
+            border-bottom: 3px solid var(--accent-blue);
+            padding-bottom: 12px;
+            margin-top: 50px;
+            display: inline-block;
+            font-size: 1.8rem;
+        }
+
+        .audio-section {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .audio-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .audio-section h3 {
+            color: var(--primary-blue);
+            margin-top: 0;
+            font-size: 1.5rem;
+            border-bottom: 2px dashed var(--light-blue);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .audio-item {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: var(--very-light-blue);
+            border-radius: 15px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .audio-item:hover {
+            border-color: var(--accent-blue);
+            transform: scale(1.02);
+        }
+
+        .audio-item h4 {
+            margin-top: 0;
+            color: var(--dark-blue);
+            font-size: 1.2rem;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 8px;
+            border-radius: 30px;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background-color: var(--light-blue);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border-radius: 30px 30px 0 0;
+            margin-top: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, var(--accent-blue), var(--white), var(--accent-blue));
+        }
+
+        /* Cute design elements */
+        .cute-element {
+            position: absolute;
+            z-index: -1;
+            font-size: 30px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+
+            100% {
+                transform: translateY(0) rotate(0);
+            }
+        }
+
+        .cloud-1 {
+            top: 120px;
+            left: 5%;
+        }
+
+        .cloud-2 {
+            top: 350px;
+            right: 7%;
+            animation-delay: 1s;
+        }
+
+        .heart-1 {
+            bottom: 200px;
+            left: 10%;
+            animation-delay: 2s;
+        }
+
+        .heart-2 {
+            top: 500px;
+            right: 5%;
+            animation-delay: 3s;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Cute decorative elements -->
+    <div class="cute-element cloud-1">☁️</div>
+    <div class="cute-element cloud-2">☁️</div>
+    <div class="cute-element heart-1">💙</div>
+    <div class="cute-element heart-2">💙</div>
+
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <!-- Logo -->
+                <a href="https://imgbb.com/"><img src="https://i.ibb.co.com/k6349nCm/Logo-Tim-Semesta.png"
+                        alt="Logo-Tim-Semesta"
+                        style="background: #fff; border-radius: 50%; width:100px; height:100px; object-fit:cover; margin-right:20px;">
+                    <h1 class="site-title">Dharma Semesta</h1>
+            </div>
+
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#book">Buku Dharma Digital</a></li>
+                <li><a href="#audio">Audio</a></li>
+            </ul>
+        </nav>
+
+        <section id="book" class="book-section">
+            <h2>Buku Dharma Digital</h2>
+            <p>Klik pada gambar buku untuk mengunduh PDF</p>
+            <!-- Cover -->
+            <a href="https://drive.google.com/file/d/1E4gl0Plj2iCOJQXKKD3QLbIlf0a5YLl_/view?usp=sharing"
+                target="_blank">
+                <img src="https://i.ibb.co.com/RpRVCH20/Dharma-Tim-Semesta-X-R2.png" alt="Buku Dharma Digital Cover"
+                    class="book-cover">
+            </a>
+        </section>
+
+        <h2 id="audio">Audio Files</h2>
+
+        <!-- Bab 1 -->
+        <div class="audio-section">
+            <h3>Bab 1</h3>
+
+            <div class="audio-item">
+                <h4>Audio 1A</h4>
+                <audio controls>
+                    <source src="audio - 1A.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <div class="audio-item">
+                <h4>Audio 1B</h4>
+                <audio controls>
+                    <source src="Audio - 1B.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+
+        <!-- Bab 2 -->
+        <div class="audio-section">
+            <h3>Bab 2</h3>
+
+            <div class="audio-item">
+                <h4>Audio 2A</h4>
+                <audio controls>
+                    <source src="Audio - 2A.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <div class="audio-item">
+                <h4>Audio 2B</h4>
+                <audio controls>
+                    <source src="Audio - 2B.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+
+        <!-- Bab 3 -->
+        <div class="audio-section">
+            <h3>Bab 3</h3>
+
+            <div class="audio-item">
+                <h4>Audio 3A</h4>
+                <audio controls>
+                    <source src="Audio - 3A.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+
+        <!-- Bab 4 -->
+        <div class="audio-section">
+            <h3>Bab 4</h3>
+
+            <div class="audio-item">
+                <h4>Audio 4A</h4>
+                <audio controls>
+                    <source src="Audio - 4A.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+
+        <!-- Bab 5 -->
+        <div class="audio-section">
+            <h3>Bab 5</h3>
+
+            <div class="audio-item">
+                <h4>Audio 5A</h4>
+                <audio controls>
+                    <source src="Audio - 5A.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+
+        <!-- Final Comic Audio -->
+        <div class="audio-section">
+            <h3>Audio Final Comic</h3>
+
+            <div class="audio-item">
+                <h4>Audio Final Comic</h4>
+                <audio controls>
+                    <source src="Audio - Komik Final.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 Dharma Semesta - All rights reserved</p>
+        </footer>
+    </div>
+</body>
+
+</html>
